@@ -17,12 +17,12 @@ public class world_rotater : MonoBehaviour {
 		{
 			Debug.Log ("Going left");
 			goSpeed = 50.0f; 
-			transform.Rotate(Vector3.up * Time.deltaTime * goSpeed); 
+			transform.Rotate(Vector3.left * Time.deltaTime * goSpeed); 
 		}
 		if (Input.GetKey ("a")){
 			Debug.Log("Going right"); 
 			goSpeed = 50.0f; 
-			transform.Rotate(Vector3.down * Time.deltaTime * goSpeed); 
+			transform.Rotate(Vector3.right * Time.deltaTime * goSpeed); 
 		}
 		
 	}
