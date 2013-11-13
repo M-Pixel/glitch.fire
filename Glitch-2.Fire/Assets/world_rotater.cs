@@ -4,8 +4,8 @@ using System.Collections;
 public class world_rotater : MonoBehaviour {
 	float goSpeed; 
 	
-	bool isJumping = false;
-	public float jumpSpeed = 50.0f; 
+//	bool isJumping = false;
+//	public float jumpSpeed = 50.0f; 
 	// Use this for initialization
 	void Start () {
 	
