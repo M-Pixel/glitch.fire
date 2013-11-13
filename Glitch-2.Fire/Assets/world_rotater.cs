@@ -13,18 +13,6 @@ public class world_rotater : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if(Input.GetKey("d"))
-		{
-			Debug.Log ("Going left");
-			goSpeed = 50.0f; 
-			transform.Rotate(Vector3.up * Time.deltaTime * goSpeed); 
-		}
-		if (Input.GetKey ("a")){
-			Debug.Log("Going right"); 
-			goSpeed = 50.0f; 
-			transform.Rotate(Vector3.down * Time.deltaTime * goSpeed); 
-		}
-		
 	}
 }
 	
