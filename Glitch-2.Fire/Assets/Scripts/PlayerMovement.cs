@@ -39,6 +39,12 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log("Going right");
 			transform.Rotate(Vector3.down * Time.deltaTime * goSpeed); 
 		}
+		/*
+		OnTriggerEnter.Collider(){
+			Object.transform.parent
+
+		}
+		*/
 	}
 	
 	IEnumerator Jump(){
@@ -52,13 +58,22 @@ public class PlayerMovement : MonoBehaviour {
 		
 	}
 
+
+	void OnColliderEnter(Collider otherCollider){
+		transform.parent = otherCollider.transform;
+	}
 	
 	void OnTriggerEnter(Collider otherCollider){
 		if(otherCollider.gameObject.name.Contains("doubleJump")){
 			StartCoroutine(enableDoubleJump()); 
 			Destroy (otherCollider.gameObject); 
 		}
-		else if(otherCollider.gameObject.name.Contains("boost"))
+
+		//if(otherCollider.gameObject.name.Contains("Platform")) {
+		//	transform.parent = otherCollider.transform;
+		//}
+
+		if(otherCollider.gameObject.name.Contains("boost"))
 		{
 			StartCoroutine(boostMechanic());
 		}

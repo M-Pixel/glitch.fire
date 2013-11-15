@@ -6,7 +6,7 @@ public class fire_burner : MonoBehaviour {
 	public GameObject gameOver; 
 	// Use this for initialization
 	void Start () {
-		moveSpeed = 0.0001f; 
+		moveSpeed = 0.005f; 
 	
 	}
 	
@@ -18,12 +18,11 @@ public class fire_burner : MonoBehaviour {
 
 	void OnTriggerEnter(Collider otherCollider)
 	{
-		/*
-		if(otherCollider.gameObject.name.Contains("Player")){
-			Instantiate(gameOver, new Vector3(Camera.main.gameObject.transform.position), new Quaternion(0,0,0,0)); 
-				Time.timeScale = 0; 
 
+		if(otherCollider.gameObject.name.Contains("PlayerModel")){
+			Application.LoadLevel("gameOverWorld"); 
 			}
-			*/ 
+			
 	}
 }
+q
