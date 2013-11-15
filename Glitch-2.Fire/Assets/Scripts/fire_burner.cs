@@ -13,7 +13,7 @@ public class fire_burner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		gameObject.transform.Translate(Vector3.up*moveSpeed); 
-		moveSpeed += 0.000002f;
+		moveSpeed += 0.000009f;
 	}
 
 	void OnTriggerEnter(Collider otherCollider)
@@ -25,4 +25,3 @@ public class fire_burner : MonoBehaviour {
 			
 	}
 }
-q
