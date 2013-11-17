@@ -5,6 +5,7 @@ public class MenuObject : MonoBehaviour {
 
 	public bool isQuit = false;
 	public bool isCredits = false;
+	public Texture myTexture; 
 	// Use this for initialization
 
 
@@ -25,7 +26,7 @@ public class MenuObject : MonoBehaviour {
 		}
 		else if(isCredits)
 		{
-			//do the credits 
+			Application.LoadLevel("Credits"); 
 		}
 		else
 		{
