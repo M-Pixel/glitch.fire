@@ -12,7 +12,7 @@ public class teleportToNewLevel : MonoBehaviour {
 	void Update () {
 	
 	}
-
+	/*
 	void OnTriggerEnter(Collider otherCollider)
 	{
 		StartCoroutine(teleportPlayer()); 
@@ -23,4 +23,5 @@ public class teleportToNewLevel : MonoBehaviour {
 		yield return new WaitForSeconds(3.0f); 
 		Application.LoadLevel(levelTwo); 
 	}
+*/
 }
