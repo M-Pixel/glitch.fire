@@ -23,19 +23,19 @@ public class PlayerMovement : MonoBehaviour {
 		// Ensure player pivot doesn't move from center of platform
 		transform.localPosition = new Vector3(0.0f, transform.localPosition.y, 0.0f);
 		// Jump
-		if (Input.GetKeyDown("w") && isJumping == false|| Input.GetKeyDown("space") && isJumping == false) 
+		if (Input.GetKeyDown("w") && isJumping == false|| Input.GetKeyDown("space") && isJumping == false|| Input.GetKeyDown("up") && isJumping == false) 
 		{
 			StartCoroutine(Jump ()); 
 			print("Jump!");
 		}
 		
 		// Move
-		if(Input.GetKey("a"))
+		if(Input.GetKey("a")||Input.GetKey ("left"))
 		{
 			Debug.Log ("Going left");
 			transform.Rotate(Vector3.up * Time.deltaTime * goSpeed); 
 		}
-		if (Input.GetKey ("d")){
+		if (Input.GetKey ("d")||Input.GetKey("right")){
 			Debug.Log("Going right");
 			transform.Rotate(Vector3.down * Time.deltaTime * goSpeed); 
 		}
