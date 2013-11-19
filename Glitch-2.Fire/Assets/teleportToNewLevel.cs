@@ -12,16 +12,18 @@ public class teleportToNewLevel : MonoBehaviour {
 	void Update () {
 	
 	}
-	/*
+
 	void OnTriggerEnter(Collider otherCollider)
 	{
-		StartCoroutine(teleportPlayer()); 
+		if(otherCollider.gameObject.name.Contains("Player")){
+			StartCoroutine(teleportPlayer()); 
+		}
 	}
 
 	IEnumerator teleportPlayer()
 	{
-		yield return new WaitForSeconds(3.0f); 
-		Application.LoadLevel(levelTwo); 
+		yield return new WaitForSeconds(2.0f); 
+		Application.LoadLevel("Level2"); 
 	}
-*/
+
 }
