@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 	
 	public float jumpSpeed = 50.0f;
-	public float timeBetweenJumps = 0.5f;
+	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 50.0f;
 	
 	/*
