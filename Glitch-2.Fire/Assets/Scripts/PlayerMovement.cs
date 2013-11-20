@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour {
 			StartCoroutine(boostMechanic());
 		}
 	}
+
 	IEnumerator enableDoubleJump()
 	{
 		Debug.Log ("AW YISS"); 
@@ -93,5 +94,6 @@ public class PlayerMovement : MonoBehaviour {
 		jumpSpeed = 50.0f; 
 		goSpeed = 50.0f; 
 	}
+	 
 
 }
