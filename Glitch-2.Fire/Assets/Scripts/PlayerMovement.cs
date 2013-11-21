@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour {
 	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 50.0f;
 	
+	private float zeroX = 0.0f;
+	private float zeroZ = 0.0f;
+	
 	/*
 	public float myYPosition; 
 	public float myZPositon; 
@@ -15,13 +18,13 @@ public class PlayerMovement : MonoBehaviour {
 	private bool isJumping = false; 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// Ensure player pivot doesn't move from center of platform
-		transform.localPosition = new Vector3(0.0f, transform.localPosition.y, 0.0f);
+		transform.localPosition = new Vector3(zeroX, transform.localPosition.y, zeroZ);
 		// Jump
 		if (Input.GetKeyDown("w") && isJumping == false|| Input.GetKeyDown("space") && isJumping == false|| Input.GetKeyDown("up") && isJumping == false) 
 		{
@@ -47,18 +50,23 @@ public class PlayerMovement : MonoBehaviour {
 		*/
 	}
 	
+	public void ResetZeroes() {
+		zeroX = this.transform.localPosition.x;
+		zeroZ = this.transform.localPosition.z;
+	}
+	
 	IEnumerator Jump(){
 		isJumping = true; 
 		rigidbody.AddForce(Vector3.up *jumpSpeed);
 		yield return new WaitForSeconds(1.0f); 
 		isJumping = false; 
 		
-//		myYPosition = ((float) Transform.position.y); 
+		//		myYPosition = ((float) Transform.position.y); 
 		//myZPositon = ((float) Transform.position.z); 
 		
 	}
-
-
+	
+	
 	void OnColliderEnter(Collider otherCollider){
 		transform.parent = otherCollider.transform;
 	}
@@ -68,17 +76,17 @@ public class PlayerMovement : MonoBehaviour {
 			StartCoroutine(enableDoubleJump()); 
 			Destroy (otherCollider.gameObject); 
 		}
-
+		
 		//if(otherCollider.gameObject.name.Contains("Platform")) {
 		//	transform.parent = otherCollider.transform;
 		//}
-
+		
 		if(otherCollider.gameObject.name.Contains("boost"))
 		{
 			StartCoroutine(boostMechanic());
 		}
 	}
-
+	
 	IEnumerator enableDoubleJump()
 	{
 		Debug.Log ("AW YISS"); 
@@ -94,6 +102,6 @@ public class PlayerMovement : MonoBehaviour {
 		jumpSpeed = 50.0f; 
 		goSpeed = 50.0f; 
 	}
-	 
-
+	
+	
 }

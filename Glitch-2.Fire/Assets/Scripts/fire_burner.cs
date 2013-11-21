@@ -17,7 +17,7 @@ public class fire_burner : MonoBehaviour {
 		if(permissionToMove = true) 
 		{
 		gameObject.transform.Translate(Vector3.up*moveSpeed); 
-		moveSpeed += 0.000009f;
+		moveSpeed += 0.000008f;
 		}
 	}
 

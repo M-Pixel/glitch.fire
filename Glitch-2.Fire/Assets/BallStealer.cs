@@ -17,6 +17,7 @@ public class BallStealer : MonoBehaviour {
 		if (otherCollider.gameObject.name.Contains ("PlayerModel")) {
 			Debug.Log("colliding with player");
 			otherCollider.transform.parent.parent = transform;
+			otherCollider.transform.parent.GetComponent<PlayerMovement>().ResetZeroes();
 		}
 	}
 }
