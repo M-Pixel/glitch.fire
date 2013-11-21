@@ -7,7 +7,7 @@ public class fire_burner : MonoBehaviour {
 	public bool permissionToMove = false; 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(Wqait());
+		StartCoroutine(Wait());
 		moveSpeed = 0.005f; 
 	
 	}
