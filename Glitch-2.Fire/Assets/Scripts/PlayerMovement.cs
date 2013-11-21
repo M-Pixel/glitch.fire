@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpSpeed = 50.0f;
 	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 50.0f;
+
+	private float zeroX = 0.0f;
+	private float zeroZ = 0.0f;
 	
 	private float zeroX = 0.0f;
 	private float zeroZ = 0.0f;
@@ -48,6 +51,11 @@ public class PlayerMovement : MonoBehaviour {
 
 		}
 		*/
+	}
+
+	public void ResetZeroes() {
+		zeroX = this.transform.localPosition.x;
+		zeroZ = this.transform.localPosition.z;
 	}
 	
 	public void ResetZeroes() {
