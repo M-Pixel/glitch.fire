@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpSpeed = 50.0f;
 	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 50.0f;
+
+	private float zeroX = 0.0f;
+	private float zeroZ = 0.0f;
 	
 	/*
 	public float myYPosition; 
@@ -21,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Ensure player pivot doesn't move from center of platform
-		transform.localPosition = new Vector3(0.0f, transform.localPosition.y, 0.0f);
+		transform.localPosition = new Vector3(zeroX, transform.localPosition.y, zeroZ);
 		// Jump
 		if (Input.GetKeyDown("w") && isJumping == false|| Input.GetKeyDown("space") && isJumping == false|| Input.GetKeyDown("up") && isJumping == false) 
 		{
@@ -45,6 +48,11 @@ public class PlayerMovement : MonoBehaviour {
 
 		}
 		*/
+	}
+
+	public void ResetZeroes() {
+		zeroX = this.transform.localPosition.x;
+		zeroZ = this.transform.localPosition.z;
 	}
 	
 	IEnumerator Jump(){
