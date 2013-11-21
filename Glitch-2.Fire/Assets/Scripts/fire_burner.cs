@@ -24,7 +24,7 @@ public class fire_burner : MonoBehaviour {
 	void OnTriggerEnter(Collider otherCollider)
 	{
 
-		if(otherCollider.gameObject.name.Contains("PlayerModel")){
+		if(otherCollider.gameObject.name.Contains("PlayerModel")||otherCollider.gameObject.name.Contains("Player")){
 			Application.LoadLevel("gameOverWorld"); 
 			}
 			

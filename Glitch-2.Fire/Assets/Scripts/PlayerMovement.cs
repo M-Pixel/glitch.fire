@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float zeroX = 0.0f;
 	private float zeroZ = 0.0f;
 	
-	private float zeroX = 0.0f;
+/*	private float zeroX = 0.0f;
 	private float zeroZ = 0.0f;
 	
 	/*
@@ -58,10 +58,10 @@ public class PlayerMovement : MonoBehaviour {
 		zeroZ = this.transform.localPosition.z;
 	}
 	
-	public void ResetZeroes() {
+/*	public void ResetZeroes() {
 		zeroX = this.transform.localPosition.x;
 		zeroZ = this.transform.localPosition.z;
-	}
+	}*/
 	
 	IEnumerator Jump(){
 		isJumping = true; 

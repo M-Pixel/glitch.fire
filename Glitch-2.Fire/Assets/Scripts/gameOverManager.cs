@@ -15,7 +15,7 @@ public class gameOverManager : MonoBehaviour {
 
 	IEnumerator returnToStart()
 	{
-		yield return new WaitForSeconds(10.0f);
+		yield return new WaitForSeconds(5.0f);
 		Application.LoadLevel("titleScreen"); 
 	}
 }
