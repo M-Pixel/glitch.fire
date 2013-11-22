@@ -6,11 +6,8 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpSpeed = 50.0f;
 	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 50.0f;
-
-	private float zeroX = 0.0f;
-	private float zeroZ = 0.0f;
 	
-/*	private float zeroX = 0.0f;
+	private float zeroX = 0.0f;
 	private float zeroZ = 0.0f;
 	
 	/*
@@ -29,39 +26,23 @@ public class PlayerMovement : MonoBehaviour {
 		// Ensure player pivot doesn't move from center of platform
 		transform.localPosition = new Vector3(zeroX, transform.localPosition.y, zeroZ);
 		// Jump
-		if (Input.GetKeyDown("w") && isJumping == false|| Input.GetKeyDown("space") && isJumping == false|| Input.GetKeyDown("up") && isJumping == false) 
+		if ((Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Jump") == 1) && isJumping == false) 
 		{
 			StartCoroutine(Jump ()); 
 			print("Jump!");
 		}
 		
 		// Move
-		if(Input.GetKey("a")||Input.GetKey ("left"))
+		if(Input.GetAxisRaw("Horizontal") != 0)
 		{
-			Debug.Log ("Going left");
-			transform.Rotate(Vector3.up * Time.deltaTime * goSpeed); 
+			transform.Rotate(Vector3.up * Time.deltaTime * goSpeed * Input.GetAxisRaw("Horizontal") * -1);
 		}
-		if (Input.GetKey ("d")||Input.GetKey("right")){
-			Debug.Log("Going right");
-			transform.Rotate(Vector3.down * Time.deltaTime * goSpeed); 
-		}
-		/*
-		OnTriggerEnter.Collider(){
-			Object.transform.parent
-
-		}
-		*/
 	}
-
+	
 	public void ResetZeroes() {
 		zeroX = this.transform.localPosition.x;
 		zeroZ = this.transform.localPosition.z;
 	}
-	
-/*	public void ResetZeroes() {
-		zeroX = this.transform.localPosition.x;
-		zeroZ = this.transform.localPosition.z;
-	}*/
 	
 	IEnumerator Jump(){
 		isJumping = true; 

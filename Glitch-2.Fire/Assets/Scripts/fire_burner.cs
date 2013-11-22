@@ -5,9 +5,12 @@ public class fire_burner : MonoBehaviour {
 	public float moveSpeed; 
 	public GameObject gameOver; 
 	public bool permissionToMove = false; 
+	public AudioClip clip; 
+	//public AudioSource source; 
+
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(Wait());
+		//StartCoroutine(Wait());
 		moveSpeed = 0.005f; 
 	
 	}
@@ -25,15 +28,16 @@ public class fire_burner : MonoBehaviour {
 	{
 
 		if(otherCollider.gameObject.name.Contains("PlayerModel")||otherCollider.gameObject.name.Contains("Player")){
-			Application.LoadLevel("gameOverWorld"); 
+			StartCoroutine(Die());
+			
 			}
 			
 	}
 
-	IEnumerator Wait()
-	{
-		yield return new WaitForSeconds(3.0f); 
-		permissionToMove = true; 
-		Debug.Log ("herp derp"); 
-	}
+	IEnumerator Die(){
+				AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position); 
+		yield return new WaitForSeconds(0.7f); 
+				Application.LoadLevel("gameOverWorld"); 
+			}
+
 }
