@@ -68,14 +68,17 @@ public class PlayerMovement : MonoBehaviour {
 	void OnCollisionEnter(Collision otherCollider){
 		// The following relative velocity check ensures that this is triggered only from landing on a platform, not from hitting underneath.
 		Debug.Log(otherCollider.relativeVelocity.y);
-		if (otherCollider.gameObject.name.Contains("Platform") && otherCollider.relativeVelocity.y >= 0) {
+		if (otherCollider.gameObject.name.Contains("Platform") && otherCollider.relativeVelocity.y >= 0|| otherCollider.gameObject.name.Contains("polyS") && otherCollider.relativeVelocity.y >= 0)
+		{
 			Debug.Log("Hit teh ground");
 		    canJump = true;
 			canDoubleJump = true;
 		}
 	}
+}
+
 	
-	void OnTriggerEnter(Collider otherCollider){
+/*	void OnTriggerEnter(Collider otherCollider){
 		if(otherCollider.gameObject.name.Contains("doubleJump")){
 			StartCoroutine(enableDoubleJump()); 
 			Destroy (otherCollider.gameObject); 
@@ -107,5 +110,4 @@ public class PlayerMovement : MonoBehaviour {
 		goSpeed = 50.0f; 
 	}
 	
-	
-}
+*/
