@@ -15,10 +15,10 @@ public class PlayerMovement : MonoBehaviour {
 	public float myZPositon; 
 	*/
 	private bool canJump = true; 
-	private bool isJumping = false; 
+	private bool canDoubleJump = true;
 	// Use this for initialization
 	void Start () {
-		
+		//Time.timeScale = 0.2f;
 	}
 	
 	// Update is called once per frame
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 		// Ensure player pivot doesn't move from center of platform
 		transform.localPosition = new Vector3(zeroX, transform.localPosition.y, zeroZ);
 		// Jump
-		if ((Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Jump") == 1) && isJumping == false) 
+		if ((Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Jump") == 1) && (canJump || canDoubleJump)) 
 		{
 			StartCoroutine(Jump ()); 
 			print("Jump!");
@@ -45,19 +45,34 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	IEnumerator Jump(){
-		isJumping = true; 
-		rigidbody.AddForce(Vector3.up *jumpSpeed);
-		yield return new WaitForSeconds(1.0f); 
-		isJumping = false; 
-		
-		//		myYPosition = ((float) Transform.position.y); 
-		//myZPositon = ((float) Transform.position.z); 
-		
+		bool isDoubleJumping = false;
+
+		// This check is redundant, but ensures these rules are enforced if the method is used elsewhere
+		if (canJump || canDoubleJump) {
+			if (canJump == false) isDoubleJumping = true;
+			Debug.Log("set double jump to true");
+			canJump = false;
+			canDoubleJump = false;
+			rigidbody.AddForce(Vector3.up *jumpSpeed);
+			yield return new WaitForSeconds(1.0f);
+			if (!isDoubleJumping) {
+				canDoubleJump = true;
+				Debug.Log("Can double jump!");
+			}
+			//		myYPosition = ((float) Transform.position.y); 
+			//myZPositon = ((float) Transform.position.z); 
+		}
 	}
 	
 	
-	void OnColliderEnter(Collider otherCollider){
-		transform.parent = otherCollider.transform;
+	void OnCollisionEnter(Collision otherCollider){
+		// The following relative velocity check ensures that this is triggered only from landing on a platform, not from hitting underneath.
+		Debug.Log(otherCollider.relativeVelocity.y);
+		if (otherCollider.gameObject.name.Contains("Platform") && otherCollider.relativeVelocity.y >= 0) {
+			Debug.Log("Hit teh ground");
+		    canJump = true;
+			canDoubleJump = true;
+		}
 	}
 	
 	void OnTriggerEnter(Collider otherCollider){
