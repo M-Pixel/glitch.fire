@@ -29,6 +29,7 @@ public class fire_burner : MonoBehaviour {
 
 		if(otherCollider.gameObject.name.Contains("PlayerModel")||otherCollider.gameObject.name.Contains("Player")){
 			StartCoroutine(Die());
+			otherCollider.GetComponent<PlayerMovement>().Freeze();
 			
 			}
 			
