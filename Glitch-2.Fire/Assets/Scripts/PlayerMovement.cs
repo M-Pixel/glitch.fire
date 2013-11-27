@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
 	
 	private float zeroX = 0.0f;
 	private float zeroZ = 0.0f;
+	private bool frozen = false;
 	
 	/*
 	public float myYPosition; 
@@ -25,17 +26,19 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 		// Ensure player pivot doesn't move from center of platform
 		transform.localPosition = new Vector3(zeroX, transform.localPosition.y, zeroZ);
-		// Jump
-		if ((Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Jump") == 1) && (canJump || canDoubleJump)) 
-		{
-			StartCoroutine(Jump ()); 
-			print("Jump!");
-		}
-		
-		// Move
-		if(Input.GetAxisRaw("Horizontal") != 0)
-		{
-			transform.Rotate(Vector3.up * Time.deltaTime * goSpeed * Input.GetAxisRaw("Horizontal") * -1);
+		if (!frozen) {
+			// Jump
+			if ((Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Jump") == 1) && (canJump || canDoubleJump)) 
+			{
+				StartCoroutine(Jump ());
+				print("Jump!");
+			}
+			
+			// Move
+			if(Input.GetAxisRaw("Horizontal") != 0)
+			{
+				transform.Rotate(Vector3.up * Time.deltaTime * goSpeed * Input.GetAxisRaw("Horizontal") * -1);
+			}
 		}
 	}
 	
@@ -54,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
 			canJump = false;
 			canDoubleJump = false;
 			rigidbody.AddForce(Vector3.up *jumpSpeed);
-			yield return new WaitForSeconds(1.0f);
+			yield return new WaitForSeconds(timeBetweenJumps);
 			if (!isDoubleJumping) {
 				canDoubleJump = true;
 				Debug.Log("Can double jump!");
@@ -74,6 +77,13 @@ public class PlayerMovement : MonoBehaviour {
 		    canJump = true;
 			canDoubleJump = true;
 		}
+	}
+
+	public void Freeze() {
+		frozen = true;
+	}
+	public void UnFreeze() {
+		frozen = false;
 	}
 }
 
