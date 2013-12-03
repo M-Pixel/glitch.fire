@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class teleportToNewLevel : MonoBehaviour {
-
+	public string nameOfLevel; 
 	// Use this for initialization
 	void Start () {
 	
@@ -23,7 +23,7 @@ public class teleportToNewLevel : MonoBehaviour {
 	IEnumerator teleportPlayer()
 	{
 		yield return new WaitForSeconds(2.0f); 
-		Application.LoadLevel("Level2"); 
+		Application.LoadLevel(nameOfLevel); 
 	}
 
 }
