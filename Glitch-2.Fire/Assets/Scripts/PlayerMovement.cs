@@ -6,7 +6,9 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpSpeed = 165.0f;
 	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 70.0f;
-	
+
+	public int levelCount = 0; 
+
 	private float zeroX = 0.0f;
 	private float zeroZ = 0.0f;
 	private bool frozen = false;
@@ -76,6 +78,10 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log("Hit teh ground");
 		    canJump = true;
 			canDoubleJump = true;
+		}
+		if (otherCollider.gameObject.name.Contains("telep"))
+		{
+			levelCount++; 2
 		}
 	}
 
