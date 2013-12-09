@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class gameOverManager : MonoBehaviour
-{
-	// This script needs to be properly modified in order to load the previous level that the player died trying to complete. ]
-	string prevLevel; 
+public class gameOverManager : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
-//		prevLevel = PlayerMovement.LevelCount;  
 		StartCoroutine(returnToStart()); 
 	}
 	
