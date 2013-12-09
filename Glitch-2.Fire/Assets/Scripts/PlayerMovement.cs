@@ -6,20 +6,18 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpSpeed = 165.0f;
 	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 70.0f;
-	
+
+	public int levelCount = 0; 
+
 	private float zeroX = 0.0f;
 	private float zeroZ = 0.0f;
 	private bool frozen = false;
-	
-	/*
-	public float myYPosition; 
-	public float myZPositon; 
-	*/
+
 	private bool canJump = true; 
 	private bool canDoubleJump = true;
 	// Use this for initialization
 	void Start () {
-		//Time.timeScale = 0.2f;
+
 	}
 	
 	// Update is called once per frame
@@ -62,8 +60,7 @@ public class PlayerMovement : MonoBehaviour {
 				canDoubleJump = true;
 				Debug.Log("Can double jump!");
 			}
-			//		myYPosition = ((float) Transform.position.y); 
-			//myZPositon = ((float) Transform.position.z); 
+
 		}
 	}
 	
@@ -77,6 +74,7 @@ public class PlayerMovement : MonoBehaviour {
 		    canJump = true;
 			canDoubleJump = true;
 		}
+
 	}
 
 	public void Freeze() {
