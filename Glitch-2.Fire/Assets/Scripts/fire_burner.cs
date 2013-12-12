@@ -6,6 +6,7 @@ public class fire_burner : MonoBehaviour {
 	public GameObject gameOver; 
 	public bool permissionToMove = false; 
 	public AudioClip clip; 
+	public string deathScene; 
 	//public AudioSource source; 
 
 	// Use this for initialization
@@ -38,7 +39,7 @@ public class fire_burner : MonoBehaviour {
 	IEnumerator Die(){
 				AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position); 
 		yield return new WaitForSeconds(0.4f); 
-				Application.LoadLevel("gameOverWorld"); 
+				Application.LoadLevel(deathSceneq); 
 			}
 
 }

@@ -83,6 +83,7 @@ public class PlayerMovement : MonoBehaviour {
 	public void UnFreeze() {
 		frozen = false;
 	}
+	
 }
 
 	
