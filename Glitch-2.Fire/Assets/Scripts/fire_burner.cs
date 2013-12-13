@@ -39,7 +39,7 @@ public class fire_burner : MonoBehaviour {
 	IEnumerator Die(){
 				AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position); 
 		yield return new WaitForSeconds(0.4f); 
-				Application.LoadLevel(deathSceneq); 
+				Application.LoadLevel(deathScene); 
 			}
 
 }
