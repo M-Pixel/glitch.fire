@@ -9,30 +9,34 @@ public class fire_burner : MonoBehaviour {
 	//public AudioSource source; 
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		//StartCoroutine(Wait());
-		moveSpeed = 0.005f; 
-	
+		moveSpeed = 0.005f;
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		if(permissionToMove = true) 
+	public void FixedUpdate () {
+		if(permissionToMove) 
 		{
-		gameObject.transform.Translate(Vector3.up*moveSpeed); 
-		moveSpeed += 0.000008f;
+			gameObject.transform.Translate(Vector3.up*moveSpeed); 
+			moveSpeed += 0.000008f;
 		}
 	}
 
-	void OnTriggerEnter(Collider otherCollider)
+	public void OnTriggerEnter(Collider otherCollider)
 	{
 
 		if(otherCollider.gameObject.name.Contains("PlayerModel")||otherCollider.gameObject.name.Contains("Player")){
 			StartCoroutine(Die());
-			otherCollider.GetComponent<PlayerMovement>().Freeze();
+		}
 			
-			}
-			
+	}
+
+	public void Freeze() {
+		permissionToMove = false;
+	}
+	public void UnFreeze() {
+		permissionToMove = true;
 	}
 
 	IEnumerator Die(){

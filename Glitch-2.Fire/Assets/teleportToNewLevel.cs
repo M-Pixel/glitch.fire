@@ -22,6 +22,7 @@ public class teleportToNewLevel : MonoBehaviour {
 
 	IEnumerator teleportPlayer()
 	{
+		GameObject.Find("Game").GetComponent<GameController>().winGame();
 		yield return new WaitForSeconds(2.0f); 
 		Application.LoadLevel(nameOfLevel); 
 	}
