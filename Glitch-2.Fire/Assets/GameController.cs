@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using Holoville.HOTween;
+using Holoville.HOTween.Plugins;
+
 public class GameController : MonoBehaviour {
 	public Font myFont;
 
@@ -10,6 +13,11 @@ public class GameController : MonoBehaviour {
 	private fire_burner fireBurner;
 	private CameraUpdater cameraUpdater;
 	private GUIStyle myGuiStyle;
+
+	private Rect scorePos;
+	private Rect jumpsPos;
+	private Rect scoreMiddlePos;
+	private Rect jumpsMiddlePos;
 
 	private TimerController timerController;
 
@@ -26,6 +34,27 @@ public class GameController : MonoBehaviour {
 		myGuiStyle.font = myFont;
 		myGuiStyle.normal.textColor = new Color(1, 0.5f, 0);
 		myGuiStyle.fontSize = 38;
+
+		scorePos = new Rect(5, 5, 200, 30);
+		jumpsPos = new Rect (
+			scorePos.x,
+			scorePos.y * 2 + scorePos.height,
+			scorePos.width,
+			scorePos.height
+		);
+
+		scoreMiddlePos = new Rect(
+			Screen.width/2-200,
+			Screen.height/2-110,
+			400,
+			100
+		);
+		jumpsMiddlePos = new Rect(
+			scoreMiddlePos.x,
+			scoreMiddlePos.y + 120,
+			scoreMiddlePos.width,
+			scoreMiddlePos.height
+		);
 	}
 	
 	// Update is called once per frame
@@ -45,8 +74,8 @@ public class GameController : MonoBehaviour {
 
 		secondsPlace = "" + secondsPlace + seconds;
 
-		GUI.Label(new Rect(5, 5, 200, 30), "Time: " + minutes + ":" + secondsPlace, myGuiStyle);
-		GUI.Label(new Rect(5, 40, 200, 30), "Jumps: " + jumpCount, myGuiStyle);
+		GUI.Label(scorePos, "Time: " + minutes + ":" + secondsPlace, myGuiStyle);
+		GUI.Label(jumpsPos, "Jumps: " + jumpCount, myGuiStyle);
 	}
 
 	public void winGame() {
@@ -54,7 +83,12 @@ public class GameController : MonoBehaviour {
 		fireBurner.Freeze();
 		player.GetComponent<PlayerMovement>().Freeze();
 		player.rigidbody.useGravity = false;
+		player.rigidbody.velocity = new Vector3();
 		cameraUpdater.SpinToWin();
+	}
+
+	public void AnimateScore() {
+		Sequence moveSequence = new Sequence (new SequenceParms());
 	}
 
 	public void addJump() {
