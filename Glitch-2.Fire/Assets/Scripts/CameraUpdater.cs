@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using Holoville.HOTween;
-using Holoville.HOTween.Plugins;
-
 public class CameraUpdater : MonoBehaviour {
 	
 	//public PlayerMovement playerMover;
@@ -21,7 +18,6 @@ public class CameraUpdater : MonoBehaviour {
 	void FixedUpdate () {
 	//	transform.Translate(0.0f, playerMover.myYPosition, playerMover.myZPosition-5.0f);
 		if (spin) {
-			Debug.Log("I am spinning");
 			transform.RotateAround(playerModel.transform.position, Vector3.up, spinSpeed);
 		}
 	}
@@ -29,6 +25,5 @@ public class CameraUpdater : MonoBehaviour {
 
 	public void SpinToWin() {
 		spin = true;
-		Debug.Log ("I got spun");
 	}
 }

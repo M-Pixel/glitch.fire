@@ -17,11 +17,12 @@ public class PlayerMovement : MonoBehaviour {
 	private bool canDoubleJump = true;
 	// Use this for initialization
 	void Start () {
-
+		rigidbody.maxAngularVelocity = goSpeed;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+		rigidbody.WakeUp();
 		// Ensure player pivot doesn't move from center of platform
 		transform.localPosition = new Vector3(zeroX, transform.localPosition.y, zeroZ);
 		if (!frozen) {
@@ -35,7 +36,9 @@ public class PlayerMovement : MonoBehaviour {
 			// Move
 			if(Input.GetAxisRaw("Horizontal") != 0)
 			{
-				transform.Rotate(Vector3.up * Time.deltaTime * goSpeed * Input.GetAxisRaw("Horizontal") * -1);
+			//	transform.Rotate(Vector3.up * Time.deltaTime * goSpeed * Input.GetAxisRaw("Horizontal") * -1);
+				rigidbody.AddTorque(0.0f, goSpeed * Input.GetAxisRaw("Horizontal") * -1, 0.0f, ForceMode.Force);
+				//rigidbody.constantForce.torque = new Vector3(0, goSpeed * Input.GetAxisRaw("Horizontal") * -1, 0);
 			}
 		}
 	}
@@ -67,6 +70,7 @@ public class PlayerMovement : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision otherCollider){
 		// The following relative velocity check ensures that this is triggered only from landing on a platform, not from hitting underneath.
+		Debug.Log("Collided with " + otherCollider.gameObject.name);
 		if (otherCollider.gameObject.name.Contains("Platform") && otherCollider.relativeVelocity.y >= 0|| otherCollider.gameObject.name.Contains("polyS") && otherCollider.relativeVelocity.y >= 0)
 		{
 			Debug.Log("Hit teh ground");

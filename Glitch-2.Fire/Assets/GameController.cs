@@ -6,13 +6,15 @@ using Holoville.HOTween;
 using Holoville.HOTween.Plugins;
 
 public class GameController : MonoBehaviour {
-	public Font myFont;
 
 	private int jumpCount;
+	private bool won = false;
 	private GameObject player;
 	private fire_burner fireBurner;
 	private CameraUpdater cameraUpdater;
-	private GUIStyle myGuiStyle;
+	public GUIStyle myGuiStyle;
+	public int level;
+	private string timerstring;
 
 	private Rect scorePos;
 	private Rect jumpsPos;
@@ -20,6 +22,8 @@ public class GameController : MonoBehaviour {
 	private Rect jumpsMiddlePos;
 
 	private TimerController timerController;
+	private int minutes;
+	private int seconds;
 
 	// Use this for initialization
 	void Start () {
@@ -29,11 +33,6 @@ public class GameController : MonoBehaviour {
 		cameraUpdater = GameObject.Find("Main Camera").GetComponent<CameraUpdater>();
 
 		timerController = gameObject.GetComponent<TimerController>();
-
-		myGuiStyle = new GUIStyle();
-		myGuiStyle.font = myFont;
-		myGuiStyle.normal.textColor = new Color(1, 0.5f, 0);
-		myGuiStyle.fontSize = 38;
 
 		scorePos = new Rect(5, 5, 200, 30);
 		jumpsPos = new Rect (
@@ -45,7 +44,7 @@ public class GameController : MonoBehaviour {
 
 		scoreMiddlePos = new Rect(
 			Screen.width/2-200,
-			Screen.height/2-110,
+			Screen.height/2-50,
 			400,
 			100
 		);
@@ -63,9 +62,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		int minutes = Mathf.FloorToInt(timerController.playDuration / 60);
-		int seconds = (int)timerController.playDuration - minutes * 60;
 		string secondsPlace;
+		if (!won) {
+			minutes = Mathf.FloorToInt(timerController.playDuration / 60);
+			seconds = (int)timerController.playDuration - minutes * 60;
+		}
 
 		if (seconds < 10)
 			secondsPlace = "0";
@@ -74,8 +75,8 @@ public class GameController : MonoBehaviour {
 
 		secondsPlace = "" + secondsPlace + seconds;
 
-		GUI.Label(scorePos, "Time: " + minutes + ":" + secondsPlace, myGuiStyle);
-		GUI.Label(jumpsPos, "Jumps: " + jumpCount, myGuiStyle);
+		timerstring = "Time: " + minutes + ":" + secondsPlace + "\nJumps: " + jumpCount;
+		GUI.Label(scorePos, timerstring, myGuiStyle);
 	}
 
 	public void winGame() {
@@ -85,10 +86,20 @@ public class GameController : MonoBehaviour {
 		player.rigidbody.useGravity = false;
 		player.rigidbody.velocity = new Vector3();
 		cameraUpdater.SpinToWin();
+		AnimateScore();
+		won = true;
 	}
 
 	public void AnimateScore() {
-		Sequence moveSequence = new Sequence (new SequenceParms());
+		myGuiStyle.alignment = TextAnchor.MiddleCenter;
+		Vector2 mySize = myGuiStyle.CalcSize(new GUIContent(timerstring));
+		//scorePos.x = scorePos.x - mySize.x / 2;
+		//scorePos.y = scorePos.y + mySize.y / 2;
+		scorePos.width = mySize.x;
+		scorePos.height = mySize.y;
+		//HOTween.To(scorePos, 0.8F, new TweenParms().Prop("x", Screen.width/2 - mySize.x / 2).Prop("y", Screen.height/2 - mySize.y/2));
+		scorePos.x = Screen.width/2 - mySize.x / 2;
+		scorePos.y = Screen.height/2 - mySize.y/2;
 	}
 
 	public void addJump() {
