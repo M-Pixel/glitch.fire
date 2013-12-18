@@ -15,7 +15,7 @@ public class creditsScroller : MonoBehaviour {
 
 	IEnumerator returnToTitle()
 	{
-		yield return new WaitForSeconds(15.0f);
+		yield return new WaitForSeconds(GameObject.Find("Main Camera").audio.clip.length);
 		Application.LoadLevel("titleScreen"); 
 	}
 }
