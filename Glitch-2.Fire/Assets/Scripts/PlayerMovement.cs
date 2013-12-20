@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour {
 	public float timeBetweenJumps = 0.25f;
 	public float goSpeed = 70.0f;
 
+	public AudioClip jumpSfx; 
+
 	public int levelCount = 0; 
 
 	private float zeroX = 0.0f;
@@ -57,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log("set double jump to true");
 			canJump = false;
 			canDoubleJump = false;
+			AudioSource.PlayClipAtPoint(jumpSfx, Camera.main.transform.position);
 			rigidbody.AddForce(Vector3.up *jumpSpeed, ForceMode.Impulse);
 			GameObject.Find("Game").GetComponent<GameController>().addJump();
 			yield return new WaitForSeconds(timeBetweenJumps);
